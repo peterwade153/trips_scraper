@@ -1,14 +1,30 @@
 # -*- coding: utf-8 -*-
 
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
-
 import scrapy
+from scrapy.loader.processors import MapCompose
 
 
-class TripsScraperItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+def clean_price(price):
+    if price:
+        price = price.replace("US$ ", "")
+        return float(price.replace(",", ""))
+
+
+def remove_whitespaces(value):
+    if value:
+        return value.strip()
+
+
+def parse_days(days):
+    if days:
+        return int(days)
+
+
+class TripItem(scrapy.Item):
+    name = scrapy.Field(input_processor=MapCompose(remove_whitespace))
+    price = scrapy.Field(input_processor=MapCompose(clean_price))
+    activities = scrapy.Field()
+    tour_type = scrapy.Field()
+    next_departure_date = scrapy.Field()
+    days = scrapy.Field(input_processor=MapCompose(parse_days))
+    country = scrapy.Field()
