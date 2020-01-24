@@ -15,7 +15,7 @@ def remove_whitespaces(value):
         return value.strip()
 
 
-def parse_days(days):
+def format_days(days):
     if days:
         return int(days)
 
@@ -26,5 +26,5 @@ class TripItem(scrapy.Item):
     activities = scrapy.Field()
     tour_type = scrapy.Field()
     next_departure_date = scrapy.Field()
-    days = scrapy.Field(input_processor=MapCompose(parse_days))
+    days = scrapy.Field(input_processor=MapCompose(format_days))
     country = scrapy.Field()

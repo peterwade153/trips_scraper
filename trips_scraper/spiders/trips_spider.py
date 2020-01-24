@@ -19,7 +19,7 @@ class TripSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     @staticmethod
-    def _parse_country(response):
+    def _parse_country_from_url(response):
         country = response.url.split("/")[-1]
         if "?" in country:
             return country.split("?")[0]
@@ -43,14 +43,13 @@ class TripSpider(scrapy.Spider):
                 "days", "span.price-holder > span > span::text", re="(\d+)"
             )
 
-            # calls helper func to get country value
-            country = TripSpider._parse_country(response)
+            country = TripSpider._parse_country_from_url(response)
 
             trip_loader.add_value("country", country)
 
             yield trip_loader.load_item()
 
-        # get details from the next page
+        # Handle pagination, fetch next page contents
         next_page = response.css("li.next > a::attr(href)").extract_first()
         if next_page:
             yield scrapy.Request(url=next_page, callback=self.parse)
