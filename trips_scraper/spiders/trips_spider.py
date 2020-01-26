@@ -33,9 +33,12 @@ class TripSpider(scrapy.Spider):
             trip_loader.add_css("name", "h4 > a.target-link::text")
             trip_loader.add_css("price", ".price-holder > span > .p::text")
             trip_loader.add_css(
-                "activities", "ul.trip-info-list > li > span.txt.elps > a::text"
+                "activities",
+                "ul.trip-info-list > li > span.txt.elps > a::text",
             )
-            trip_loader.add_css("tour_type", "ul.trip-info-list > li > span.txt::text")
+            trip_loader.add_css(
+                "tour_type", "ul.trip-info-list > li > span.txt::text"
+            )
             trip_loader.add_css(
                 "next_departure_date", "ul.departure-table > li > span::text"
             )
