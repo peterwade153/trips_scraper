@@ -1,6 +1,8 @@
 # trips_scraper
 
-This is a complete scrapy spider which pulls trips data from https://www.bookmundi.com specifically for the Eastafrican region i.e Uganda, Kenya and Tanzania.
+This is a complete scrapy spider built using [Scrapy](https://docs.scrapy.org/en/latest/index.html), a web crawling and scraping framework, and Python 3.6 
+
+The spider pulls tourism trips data from https://www.bookmundi.com specifically for the East-african region i.e Uganda, Kenya and Tanzania.
 
 The data includes name(short description), prices, activities, tour types, departures dates, duration days and country.
 
